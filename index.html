@@ -10,27 +10,39 @@
 
 <body>
     <nav class="navbar">
-        <a href="#index.html">Home</a>
-        <a href="#about.html">Tentang</a>
-        <a href="#project">Project</a>
-        <a href="#contact.html">Kontak</a>
+        <div class="nav-container">
+            <a href="#home" class="logo">Adam</a>
+            <div class="menu-toggle" id="menu-toggle" aria-label="Buka menu">&#9776;</div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <section id="#index.html" class="hero">
+    <section class="hero">
         <div class="hero-content">
+            <div class="hero-img" id="hero-img">
+                <img src="assets/adam.jpg" alt="foto">
+            </div>
             <h1 class="hero-title">Halo, Saya <span class="highlight">Adam</span></h1>
             <p class="hero-subtitle">Selamat datang di web portofolio saya</p>
             <a href="#projects" class="cta-button">Lihat Projects</a>
         </div>
     </section>
 
-    <section id="#about.html">
-        <img src="assets/adam.jpg" alt="foto">
-        <h2>Tentang Saya</h2>
-        <p>Saat ini saya adalah seorang mahasiswa prodi sistem informasi fakultas ilmu komputer di Universitas Muhammadiyah Riau angkatan 2023. </p>
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Tentang Saya</h2>
+                <p>Saat ini saya adalah seorang mahasiswa prodi sistem informasi fakultas ilmu komputer di Universitas Muhammadiyah Riau angkatan 2023. Saya memiliki passion dalam dunia teknologi dan pengembangan web. Saya senang belajar hal-hal baru dan selalu berusaha untuk meningkatkan skill saya dalam bidang pemrograman dan desain.</p>
+            </div>
+        </div>
     </section>
 
-    <section id="#project">
+    <section id="projects">
         <div class="container">
             <h2>Project Saya</h2>
             <div class="project-list">
@@ -54,7 +66,7 @@
         </div>
     </section>
 
-    <section id="#contact.html">
+    <section id="contact">
         <div class="container">
             <h2>Kontak</h2>
             <div class="contact-content">
@@ -62,7 +74,7 @@
                 <div class="contact-info">
                     <a href="adamnur7890@gmail.com" class="contact-link">📧 adamnur7890@gmail.com</a>
                     <a href="https://github.com/adamaja29" class="contact-link">🐱 GitHub</a>
-                    <a href="https://www.instagram.com/adamnurrr29/">Intagram</a>
+                    <a href="https://www.instagram.com/adamnurrr29/">📷 Instagram</a>
                 </div>
     </section>
     <script src="script.js"></script>
