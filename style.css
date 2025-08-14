@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -77,28 +78,62 @@ body {
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
-        padding: 8px; /* area klik lebih besar */
+        padding: 8px;
+        z-index: 1001;
+        position: relative;
     }
 
     .nav-menu {
         position: fixed;
         top: 0;
         right: -250px;
-        height: 100%;
-        background: #1e293b;
+        height: 100vh;
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         flex-direction: column;
         width: 250px;
-        padding: 60px 20px;
-        gap: 20px;
+        padding: 80px 20px 20px;
+        gap: 25px;
         transition: right 0.3s ease;
+        z-index: 1000;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        border-left: 1px solid rgba(255, 200, 0, 0.2);
     }
 
     .nav-menu.show {
         right: 0;
     }
+
+    .nav-menu li {
+        width: 100%;
+        text-align: left;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 12px 15px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+        background-color: rgba(255, 200, 0, 0.1);
+        transform: translateX(5px);
+    }
+
+    /* Overlay untuk menutup menu saat klik di luar */
+    .nav-menu.show::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+    }
 }
 
-/* Hero Section Styles */
+/* ===== HERO SECTION ===== */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -109,17 +144,16 @@ body {
   overflow: hidden;
 }
 
+/* Overlay hitam opsional */
 .hero::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
   z-index: 1;
 }
 
+/* Konten utama */
 .hero-content {
   display: flex;
   flex-direction: column;
@@ -131,15 +165,10 @@ body {
   padding: 0 20px;
 }
 
+/* Wrapper foto profil + efek lingkaran */
 .hero-img {
-  width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(100%);
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: transform 0.2s ease-out;
+  position: relative;
+  display: inline-block;
 }
 
 .hero-img::before {
@@ -150,38 +179,31 @@ body {
   transform: translate(-50%, -50%);
   width: 220px;
   height: 220px;
-  background: linear-gradient(45deg, #ffc800ff, #ff6b00);
+  background: linear-gradient(45deg, #ffc800, #ff6b00);
   border-radius: 50%;
   z-index: -1;
   opacity: 0.3;
   animation: pulse 2s ease-in-out infinite;
 }
 
+/* Animasi lingkaran */
 @keyframes pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.1);
-    opacity: 0.1;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.3;
-  }
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
 }
 
+/* Gambar profil */
 .hero-img img {
   width: 180px;
   height: 180px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid #ffc800ff;
+  border: 3px solid #ffc800;
+  filter: brightness(60%);
   transition: all 0.3s ease;
   position: relative;
   top: -10px;
-filter: brightness(60%);
 }
 
 .hero-img:hover img {
@@ -190,6 +212,7 @@ filter: brightness(60%);
   box-shadow: 0 0 30px rgba(255, 200, 0, 0.5);
 }
 
+/* Judul & teks */
 .hero-title {
   font-size: 2.5rem;
   font-weight: 700;
@@ -200,20 +223,21 @@ filter: brightness(60%);
 
 .hero-subtitle {
   font-size: 1.2rem;
-  color: #cccccc;
+  color: #ccc;
   margin-bottom: 20px;
   opacity: 0;
   animation: fadeInUp 1s ease 0.9s forwards;
 }
 
 .highlight {
-  color: #ffc800ff;
+  color: #ffc800;
 }
 
+/* Tombol CTA */
 .cta-button {
   display: inline-block;
   padding: 12px 30px;
-  background: linear-gradient(45deg, #ffc800ff, #ff6b00);
+  background: linear-gradient(45deg, #ffc800, #ff6b00);
   color: #000;
   text-decoration: none;
   border-radius: 25px;
@@ -221,7 +245,6 @@ filter: brightness(60%);
   transition: all 0.3s ease;
   opacity: 0;
   animation: fadeInUp 1s ease 1.4s forwards;
-
 }
 
 .cta-button:hover {
@@ -229,152 +252,334 @@ filter: brightness(60%);
   box-shadow: 0 10px 25px rgba(255, 200, 0, 0.3);
 }
 
+/* Animasi teks */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 2; transform: translateY(0); }
 }
 
+/* ===== RESPONSIVE STYLES ===== */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
   }
-  
+
   .hero-img img {
     width: 150px;
     height: 150px;
   }
-  
-  .hero-img::before {
-    width: 170px;
-    height: 170px;
+
+  .cta-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 }
 
-/* About Section Styles */
 .about {
-    min-height: 100vh;
-    padding: 100px 50px 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+
+  color: #fff;
+  padding: 100px 20px;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  max-width: 1100px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.about-img {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+}
+
+.about-img img {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ffc800ff;
+  transition: transform 0.3s ease;
 }
 
 .about-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    position: relative;
+  flex: 2;
+  max-width: 600px;
+}
+
+.about-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
 .about-text {
-    flex: 1;
-    max-width: 600px;
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 30px;
+  line-height: 1.6;
 }
 
-.about-text h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #ffc800ff;
+/* Animasi teks */
+@keyframes pulse-text {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(3px);
+  }
 }
 
-.about-text p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: #cccccc;
-    margin-bottom: 15px;
+/* Animasi panah */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
 }
 
-/* Hero Image Scroll Effect */
-.hero-img {
-    transition: opacity 0.5s ease, transform 0.5s ease;
+/* Style tombol */
+.cta-button-about {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  animation: pulse-text 1.5s infinite;
+}
+
+/* Panahnya lompat */
+.scroll-arrow {
+  display: inline-block;
+  animation: bounce 1s infinite;
+}
+
+
+
+//projects section
+/* ==== Projects Section ==== */
+.projects {
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     position: relative;
+    color: #fff;
 }
 
-.hero-img.fade-out {
-    opacity: 0;
-    transform: scale(0.8) translateY(-50px);
+.projects .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 80px;
+    color: #ffc800;
+    text-shadow: 0 0 10px rgba(255, 200, 0, 0.3);
 }
 
-.hero-img.fade-in {
-    opacity: 1;
-    transform: scale(1) translateY(0);
+/* ==== Timeline ==== */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* About Section Image Container */
-.about-img-container {
+.timeline-line {
     position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #ffc800, #ff6b00);
+    transform: translateX(-50%);
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(255, 200, 0, 0.5);
 }
 
-.about-img-container.show {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 2;
 }
 
-.about-img-container img {
+.timeline-item.left {
+    flex-direction: row-reverse;
+}
+
+.timeline-item.right {
+    flex-direction: row;
+}
+
+.timeline-item .content,
+.timeline-item .image {
+    flex: 1;
+    padding: 30px;
+}
+
+.timeline-item .content {
+    background: rgba(255, 200, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 200, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(255, 200, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.timeline-item.left .content {
+    margin-right: 80px;
+    text-align: right;
+}
+
+.timeline-item.right .content {
+    margin-left: 80px;
+    text-align: left;
+}
+
+.timeline-item .content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(255, 200, 0, 0.2);
+}
+
+.timeline-item .image {
+    text-align: center;
+}
+
+.timeline-item .image img {
     width: 100%;
-    height: 100%;
+    max-width: 450px;
+    height: 280px;
     object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #ffc800ff;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 200, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
-/* Responsive adjustments */
+.timeline-item .image img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(255, 200, 0, 0.3);
+}
+
+.timeline-item .content h3 {
+    color: #ffc800;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.timeline-item .content p {
+    color: #e0e0e0;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+/* ==== Project Button ==== */
+.project-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #ffc800, #ff6b00);
+    color: #000;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 200, 0, 0.3);
+}
+
+.project-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 200, 0, 0.5);
+}
+
+/* ==== Contact Section ==== */
+#contact {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+#contact h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.contact-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-link {
+    color: #ffc800;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+    color: #ff6b00;
+}
+
+/* ==== Responsive Design ==== */
 @media (max-width: 768px) {
-    .about {
-        padding: 80px 20px 50px;
+    .timeline-line {
+        left: 30px;
     }
     
-    .about-content {
-        flex-direction: column;
-        text-align: center;
+    .timeline-item {
+        flex-direction: column !important;
+        align-items: flex-start;
+        padding-left: 60px;
     }
     
-    .about-text {
+    .timeline-item .content {
+        margin: 20px 0;
+        width: 100%;
+        text-align: left !important;
+    }
+    
+    .timeline-item .image {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .timeline-item .image img {
         max-width: 100%;
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects {
+        padding: 60px 15px;
     }
     
-    .about-text h2 {
+    .projects .section-title {
         font-size: 2rem;
     }
     
-    .about-text p {
-        font-size: 1rem;
+    .timeline-item .content {
+        padding: 20px;
     }
     
-    .about-img-container {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        margin: 30px auto;
-        width: 200px;
-        height: 200px;
-    }
-    
-    .about-img-container.show {
-        transform: scale(1);
+    .timeline-item .content h3 {
+        font-size: 1.5rem;
     }
 }

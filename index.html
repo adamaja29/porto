@@ -14,7 +14,7 @@
             <a href="#home" class="logo">Adam</a>
             <div class="menu-toggle" id="menu-toggle" aria-label="Buka menu">&#9776;</div>
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="#hero">Home</a></li>
+                <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -22,7 +22,7 @@
         </div>
     </nav>
 
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-img" id="hero-img">
                 <img src="assets/adam.jpg" alt="foto">
@@ -34,37 +34,75 @@
     </section>
 
     <section class="about" id="about">
-        <div class="about-content">
-            <div class="about-text">
-                <h2>Tentang Saya</h2>
-                <p>Saat ini saya adalah seorang mahasiswa prodi sistem informasi fakultas ilmu komputer di Universitas Muhammadiyah Riau angkatan 2023. Saya memiliki passion dalam dunia teknologi dan pengembangan web. Saya senang belajar hal-hal baru dan selalu berusaha untuk meningkatkan skill saya dalam bidang pemrograman dan desain.</p>
+        <div class="about-container">
+            <div class="about-img">
+                <img src="assets/adam.jpg" alt="About Image">
+            </div>
+            <div class="about-content">
+                <h2 class="about-title">Tentang <span class="highlight">Saya</span></h2>
+                <p class="about-text">
+                    Saat ini saya adalah seorang mahasiswa prodi sistem informasi fakultas ilmu komputer di Universitas
+                    Muhammadiyah Riau angkatan 2023.
+                    Saya memiliki passion dalam dunia teknologi dan pengembangan web.
+                    Saya senang belajar hal-hal baru dan selalu berusaha untuk meningkatkan skill saya dalam bidang
+                    pemrograman dan desain.
+                </p>
+                <a class="cta-button-about">
+                    Lanjut scroll 😁
+                    <span class="scroll-arrow">⬇️</span>
+                </a>
+
             </div>
         </div>
     </section>
 
-    <section id="projects">
-        <div class="container">
-            <h2>Project Saya</h2>
-            <div class="project-list">
-                <div class="project-item">
-                    <h3>Project 1</h3>
-                    <p>Deskripsi singkat tentang project 1.</p>
-                    <a href="project1.html" class="project-link">Lihat Detail</a>
-                </div>
-                <div class="project-item">
-                    <h3>Project 2</h3>
-                    <p>Deskripsi singkat tentang project 2.</p>
-                    <a href="project2.html" class="project-link">Lihat Detail</a>
-                </div>
-                <div class="project-item">
-                    <h3>Project 3</h3>
-                    <p>Deskripsi singkat tentang project 3.</p>
-                    <a href="project3.html" class="project-link">Lihat Detail</a>
-                </div>
-            </div>
+<section class="projects" id="projects">
+  <h2 class="section-title">Project <span class="highlight">Saya</span></h2>
 
-        </div>
-    </section>
+  <div class="timeline">
+    <div class="timeline-line"></div> <!-- Pindahkan ke sini -->
+
+    <!-- Project 1 -->
+    <div class="timeline-item left">
+      <div class="content">
+        <h3>Project 1</h3>
+        <p>Deskripsi singkat project pertama kamu.</p>
+        <a href="project1.html" class="project-btn">Lihat Detail</a>
+      </div>
+      <div class="image">
+        <img src="assets/ecom1.png" alt="Project 1">
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="timeline-item left">
+      <div class="image">
+        <img src="assets/ecom2.png" alt="Project 2">
+      </div>
+      <div class="content">
+        <h3>Project 2</h3>
+        <p>Deskripsi singkat project kedua kamu.</p>
+        <a href="project2.html" class="project-btn">Lihat Detail</a>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="timeline-item left">
+      <div class="content">
+        <h3>Project 3</h3>
+        <p>Deskripsi singkat project ketiga kamu.</p>
+        <a href="project3.html" class="project-btn">Lihat Detail</a>
+      </div>
+      <div class="image">
+        <img src="assets/presensi.png" alt="Project 3">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
 
     <section id="contact">
         <div class="container">

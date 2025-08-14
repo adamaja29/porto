@@ -2,22 +2,37 @@
 const menuToggle = document.getElementById("menu-toggle");
 const navMenu = document.getElementById("nav-menu");
 const navLinks = document.querySelectorAll(".nav-menu a");
+const navbar = document.querySelector(".navbar");
 
 // Toggle menu burger
-menuToggle.addEventListener("click", () => {
+menuToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
     navMenu.classList.toggle("show");
+    menuToggle.classList.toggle("active");
 });
 
+// Tutup menu saat klik di luar
+document.addEventListener("click", (e) => {
+    if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        navMenu.classList.remove("show");
+        menuToggle.classList.remove("active");
+    }
+});
+
+// Tutup menu saat link diklik
 navLinks.forEach(link => {
     link.addEventListener("click", () => {
         navMenu.classList.remove("show");
+        menuToggle.classList.remove("active");
     });
 });
 
+// Scroll effect untuk navbar
 window.addEventListener("scroll", () => {
-    document.querySelector(".navbar").classList.toggle("scrolled", window.scrollY > 50);
+    navbar.classList.toggle("scrolled", window.scrollY > 50);
 });
 
+// Active link highlighting
 navLinks.forEach(link => {
     link.addEventListener("click", () => {
         navLinks.forEach(l => l.classList.remove("active"));
@@ -25,63 +40,32 @@ navLinks.forEach(link => {
     });
 });
 
-// Scroll Effect for Hero Image
-const heroImg = document.getElementById("hero-img");
-const aboutSection = document.getElementById("about");
-const aboutImgContainer = document.createElement('div');
-aboutImgContainer.className = 'about-img-container';
-aboutImgContainer.innerHTML = '<img src="assets/adam.jpg" alt="foto">';
-aboutSection.appendChild(aboutImgContainer);
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    });
+});
 
-// Scroll effect variables
-let lastScrollY = window.scrollY;
-let heroImgVisible = true;
-let aboutImgVisible = false;
-
-// Smooth scroll effect
-function handleScrollEffect() {
-    const scrollY = window.scrollY;
-    const heroSection = document.querySelector('.hero');
-    const heroHeight = heroSection.offsetHeight;
-    const aboutTop = aboutSection.offsetTop;
-    const aboutHeight = aboutSection.offsetHeight;
-    
-    // Hero image fade out effect
-    if (scrollY < heroHeight * 0.8) {
-        const fadeProgress = scrollY / (heroHeight * 0.8);
-        heroImg.style.opacity = Math.max(0, 1 - fadeProgress);
-        heroImg.style.transform = `translateY(${scrollY * 0.3}px) scale(${1 - fadeProgress * 0.2})`;
+// Prevent body scroll when menu is open
+menuToggle.addEventListener("click", () => {
+    if (navMenu.classList.contains("show")) {
+        document.body.style.overflow = "hidden";
     } else {
-        heroImg.style.opacity = 0;
-        heroImg.style.transform = 'translateY(100px) scale(0.8)';
+        document.body.style.overflow = "";
     }
-    
-    // About image fade in effect
-    const aboutProgress = (scrollY - aboutTop + window.innerHeight * 0.5) / (aboutHeight * 0.5);
-    if (scrollY > aboutTop - window.innerHeight * 0.5 && scrollY < aboutTop + aboutHeight) {
-        const fadeInProgress = Math.max(0, Math.min(1, aboutProgress));
-        aboutImgContainer.style.opacity = fadeInProgress;
-        aboutImgContainer.style.transform = `translateY(-50%) scale(${0.8 + fadeInProgress * 0.2})`;
-        aboutImgContainer.classList.add('show');
-    } else {
-        aboutImgContainer.style.opacity = 0;
-        aboutImgContainer.classList.remove('show');
-    }
-}
+});
 
-// Throttle scroll events for performance
-let ticking = false;
-function updateScrollEffect() {
-    if (!ticking) {
-        requestAnimationFrame(() => {
-            handleScrollEffect();
-            ticking = false;
-        });
-        ticking = true;
-    }
-}
-
-// Initialize and add event listeners
-window.addEventListener('scroll', updateScrollEffect);
-window.addEventListener('load', handleScrollEffect);
+navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        document.body.style.overflow = "";
+    });
+});
 
