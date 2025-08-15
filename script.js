@@ -1,29 +1,58 @@
-//navbar.js
+// navbar.js - Optimized version
 const menuToggle = document.getElementById("menu-toggle");
 const navMenu = document.getElementById("nav-menu");
 const navLinks = document.querySelectorAll(".nav-menu a");
 const navbar = document.querySelector(".navbar");
 
-// Toggle menu burger
-menuToggle.addEventListener("click", (e) => {
-    e.stopPropagation();
+// Fungsi untuk toggle menu
+function toggleMenu() {
+    const isOpen = navMenu.classList.contains("show");
     navMenu.classList.toggle("show");
     menuToggle.classList.toggle("active");
+    document.body.style.overflow = isOpen ? "" : "hidden";
+}
+
+// Fungsi untuk close menu
+function closeMenu() {
+    navMenu.classList.remove("show");
+    menuToggle.classList.remove("active");
+    document.body.style.overflow = "";
+}
+
+// Event listeners
+menuToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleMenu();
 });
 
-// Tutup menu saat klik di luar
 document.addEventListener("click", (e) => {
     if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-        navMenu.classList.remove("show");
-        menuToggle.classList.remove("active");
+        closeMenu();
     }
 });
 
-// Tutup menu saat link diklik
+// Gabungkan semua event listener untuk navLinks
 navLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        navMenu.classList.remove("show");
-        menuToggle.classList.remove("active");
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+        
+        // Close menu
+        closeMenu();
+        
+        // Active link highlighting
+        navLinks.forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+        
+        // Smooth scrolling dengan offset navbar
+        const target = document.querySelector(link.getAttribute("href"));
+        if (target) {
+            const navbarHeight = navbar.offsetHeight || 60;
+            const targetPosition = target.offsetTop - navbarHeight;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth"
+            });
+        }
     });
 });
 
@@ -32,40 +61,88 @@ window.addEventListener("scroll", () => {
     navbar.classList.toggle("scrolled", window.scrollY > 50);
 });
 
-// Active link highlighting
-navLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        navLinks.forEach(l => l.classList.remove("active"));
-        link.classList.add("active");
-    });
+// Hero section fade effect on scroll
+window.addEventListener("scroll", function () {
+    const heroSection = document.querySelector(".hero");
+    if (!heroSection) return;
+    
+    const scrollY = window.scrollY;
+    const fadeStart = 0;
+    const fadeEnd = 400;
+    
+    let opacity = 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart);
+    opacity = Math.max(0, Math.min(1, opacity));
+    
+    heroSection.style.opacity = opacity;
 });
 
-// Smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+// Animasi slide-in/out untuk about image dengan arah scroll
+const aboutImage = document.querySelector('.about-img');
+let lastScrollY = window.scrollY;
+
+const observerOptions = {
+    threshold: [0, 0.5, 0.7, 0.9, 1],
+    rootMargin: '0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const currentScrollY = window.scrollY;
+        const isScrollingDown = currentScrollY > lastScrollY;
+        
+        if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+            entry.target.classList.add('animate');
+            entry.target.classList.remove('hidden');
+        } else if (!isScrollingDown && entry.intersectionRatio < 0.1) {
+            entry.target.classList.remove('animate');
+            entry.target.classList.add('hidden');
         }
+        
+        lastScrollY = currentScrollY;
     });
-});
+}, observerOptions);
 
-// Prevent body scroll when menu is open
-menuToggle.addEventListener("click", () => {
-    if (navMenu.classList.contains("show")) {
-        document.body.style.overflow = "hidden";
-    } else {
-        document.body.style.overflow = "";
-    }
-});
+if (aboutImage) {
+    observer.observe(aboutImage);
+}
 
-navLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        document.body.style.overflow = "";
+// Scroll animations for timeline items
+const timelineItems = document.querySelectorAll('.timeline-item');
+console.log("Timeline items found:", timelineItems.length); // Log jumlah elemen timeline
+
+let lastScrollYTimeline = window.scrollY;
+
+const timelineObserverOptions = {
+    threshold: [0, 0.5, 0.7, 0.9, 1],
+    rootMargin: '0px'
+};
+
+const timelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        console.log("Entry:", entry); // Log setiap entry yang terdeteksi
+        const currentScrollY = window.scrollY;
+        const isScrollingDown = currentScrollY > lastScrollYTimeline;
+        
+        if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+            entry.target.classList.add('animate-in');
+            entry.target.classList.remove('animate-out');
+            console.log("Animating in:", entry.target); // Log elemen yang dianimasikan
+        } else {
+            entry.target.classList.add('animate-out');
+            entry.target.classList.remove('animate-in');
+            console.log("Animating out:", entry.target); // Log elemen yang dianimasikan keluar
+        }
+        
+        lastScrollYTimeline = currentScrollY;
     });
+}, timelineObserverOptions);
+
+timelineItems.forEach(item => {
+    timelineObserver.observe(item);
 });
 
+// Update scroll positions
+window.addEventListener('scroll', () => {
+    lastScrollY = window.scrollY;
+    lastScrollYTimeline = window.scrollY;
+}, { passive: true });
