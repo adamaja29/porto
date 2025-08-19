@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 2: E-Commerce Advanced - Swiper Slider</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <style>
+    /* Custom styles for Project 2 */
+    .project2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .swiper-section {
+      margin: 2rem 0;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 500px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .swiper-slide {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 2rem;
+    }
+
+    .slide-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-description {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .project-info {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .feature-card {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .back-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+      margin: 2rem auto;
+      display: block;
+      width: fit-content;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .swiper-pagination-bullet {
+      background: white;
+      opacity: 0.5;
+    }
+
+    .swiper-pagination-bullet-active {
+      opacity: 1;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .swiper {
+        height: 300px;
+      }
+      
+      .slide-title {
+        font-size: 1.2rem;
+      }
+      
+      .slide-description {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html#home" class="logo">Adam</a>
+      <div class="menu-toggle" id="menu-toggle" aria-label="Buka menu">&#9776;</div>
+    </div>
+  </nav>
+
+  <!-- Project 2 Container -->
+  <div class="project2-container">
+    <!-- Hero Section -->
+    <section class="project-hero">
+      <h1>Project 2: E-Commerce Advanced Platform</h1>
+      <p class="subtitle">Platform e-commerce canggih dengan fitur lengkap untuk bisnis online skala besar</p>
+    </section>
+
+    <!-- Swiper Slider Section -->
+    <section class="swiper-section">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 - Halaman Utama -->
+          <div class="swiper-slide">
+            <img src="assets/ecom2/halamanutama.png" alt="Halaman Utama E-Commerce">
+            <div class="slide-overlay">
+              <h3 class="slide-title">Halaman Utama E-Commerce</h3>
+              <p class="slide-description">Tampilan utama yang modern dengan banner promosi dan kategori produk yang menarik</p>
+            </div>
+          </div>
+
+          <!-- Slide 2 - Shop/Produk -->
+          <div class="swiper-slide">
+            <img src="assets/ecom2/shop.png" alt="Katalog Produk">
+            <div class="slide-overlay">
+              <h3 class="slide-title">Katalog Produk Lengkap</h3>
+              <p class="slide-description">Katalog produk dengan filter canggih, pencarian, dan sorting untuk pengalaman belanja terbaik</p>
+            </div>
+          </div>
+
+          <!-- Slide 3 - Detail Produk -->
+          <div class="swiper-slide">
+            <img src="assets/ecom2/detail.png" alt="Detail Produk">
+            <div class="slide-overlay">
+              <h3 class="slide-title">Detail Produk Interaktif</h3>
+              <p class="slide-description">Tampilan detail produk dengan zoom gambar, review customer, dan rekomendasi produk terkait</p>
+            </div>
+          </div>
+
+          <!-- Slide 4 - Keranjang Belanja -->
+          <div class="swiper-slide">
+            <img src="assets/ecom2/keranjang.png" alt="Keranjang Belanja">
+            <div class="slide-overlay">
+              <h3 class="slide-title">Keranjang Belanja Canggih</h3>
+              <p class="slide-description">Keranjang dengan fitur wishlist, kupon diskon, dan perhitungan ongkos kirim otomatis</p>
+            </div>
+          </div>
+
+          <!-- Slide 5 - Checkout Multi-Step -->
+          <div class="swiper-slide">
+            <img src="assets/ecom2/checkout.png" alt="Proses Checkout">
+            <div class="slide-overlay">
+              <h3 class="slide-title">Checkout Multi-Step</h3>
+              <p class="slide-description">Proses checkout yang smooth dengan integrasi berbagai metode pembayaran dan pengiriman</p>
+            </div>
+          </div>
+
+          <!-- Slide 6 - Dashboard Admin -->
+          <div class="swiper-slide">
+            <img src="assets/ecom2/dashboardadmin.png" alt="Dashboard Admin">
+            <div class="slide-overlay">
+              <h3 class="slide-title">Dashboard Admin Lengkap</h3>
+              <p class="slide-description">Analitik penjualan, manajemen inventori, dan laporan detail untuk pengambilan keputusan bisnis</p>
+            </div>
+          </div>
+
+          <!-- Slide 7 - Dashboard User -->
+          <div class="swiper-slide">
+            <img src="assets/ecom2/dashbboarduser.png" alt="Dashboard User">
+            <div class="slide-overlay">
+              <h3 class="slide-title">Dashboard User Personal</h3>
+              <p class="slide-description">Panel user untuk tracking pesanan, riwayat pembelian, dan manajemen profil</p>
+            </div>
+          </div>
+
+          <!-- Slide 8 - Laporan & Analitik -->
+          <div class="swiper-slide">
+            <img src="assets/ecom2/laporan.png" alt="Laporan & Analitik">
+            <div class="slide-overlay">
+              <h3 class="slide-title">Laporan & Analitik</h3>
+              <p class="slide-description">Insight bisnis lengkap dengan grafik penjualan, performa produk, dan tren customer</p>
+            </div>
+          </div>
+
+          <!-- Slide 9 - Pembelian & Pesanan -->
+          <div class="swiper-slide">
+            <img src="assets/ecom2/pembelian.png" alt="Pembelian & Pesanan">
+            <div class="slide-overlay">
+              <h3 class="slide-title">Manajemen Pesanan</h3>
+              <p class="slide-description">Sistem tracking pesanan real-time dengan notifikasi status dan integrasi logistik</p>
+            </div>
+          </div>
+
+          <!-- Slide 10 - Shop Interface -->
+          <div class="swiper-slide">
+            <img src="assets/ecom2/shop.png" alt="Shop Interface">
+            <div class="slide-overlay">
+              <h3 class="slide-title">Shop Interface Modern</h3>
+              <p class="slide-description">Interface toko online dengan filter canggih, wishlist, dan sistem rekomendasi AI</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <!-- Project Info -->
+    <section class="project-info">
+      <h2>Fitur Utama E-Commerce Advanced</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>AI Recommendation</h3>
+          <p>Sistem rekomendasi produk berbasis AI untuk meningkatkan konversi penjualan</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Advanced Analytics</h3>
+          <p>Analitik mendalam dengan machine learning untuk prediksi tren dan optimasi inventori</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3>Multi-language Support</h3>
+          <p>Dukungan multi-bahasa untuk pasar internasional</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Multi-Currency</h3>
+          <p>Transaksi dalam berbagai mata uang dengan konversi otomatis</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🚚</div>
+          <h3>Multi-Shipping</h3>
+          <p>Integrasi dengan berbagai kurir dan tracking real-time</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <h3>Smart Notifications</h3>
+          <p>Notifikasi otomatis untuk promo, pesanan, dan update status</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back Button -->
+    <a href="index.html#projects" class="back-button">⬅️ Kembali ke Projects</a>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // Initialize Swiper
+    const swiper = new Swiper('.mySwiper', {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
+        768: {
+          slidesPerView: 1,
+          spaceBetween: 30
+        }
+      }
+    });
+  </script>
+</body>
+</html>
